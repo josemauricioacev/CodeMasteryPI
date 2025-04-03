@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Estilos personalizados para el editor de código */
+.code-editor-container {
+  @apply relative overflow-hidden rounded-lg border;
+}
+
+.code-editor-tabs {
+  @apply flex bg-muted;
+}
+
+.code-editor-tab {
+  @apply px-4 py-2 text-sm font-medium cursor-pointer;
+}
+
+.code-editor-tab.active {
+  @apply bg-background text-foreground;
+}
+
+.code-editor-content {
+  @apply p-4 bg-background;
+}
+
+.code-editor-textarea {
+  @apply w-full h-64 p-4 font-mono text-sm bg-muted/30 rounded-md focus:outline-none focus:ring-2 focus:ring-primary resize-none;
+}
+
+.code-preview {
+  @apply w-full h-64 bg-white rounded-md border overflow-auto;
+}
+
+/* Estilos para las tarjetas de curso */
+.course-card {
+  @apply relative overflow-hidden transition-all duration-300 hover:shadow-lg;
+}
+
+.course-card-html {
+  @apply bg-gradient-to-br from-html-light to-white border-l-4 border-html;
+}
+
+.course-card-css {
+  @apply bg-gradient-to-br from-css-light to-white border-l-4 border-css;
+}
+
+.course-card-javascript {
+  @apply bg-gradient-to-br from-javascript-light to-white border-l-4 border-javascript;
+}
+
+.course-card-python {
+  @apply bg-gradient-to-br from-python-light to-white border-l-4 border-python;
+}
+
+/* Estilos para el sidebar */
+.sidebar {
+  @apply fixed top-0 left-0 h-full w-64 bg-background border-r z-40 transition-transform duration-300 ease-in-out;
+}
+
+.sidebar-collapsed {
+  @apply -translate-x-full md:translate-x-0 md:w-20;
+}
+
+.sidebar-header {
+  @apply h-16 flex items-center justify-between px-4 border-b;
+}
+
+.sidebar-content {
+  @apply p-4 overflow-y-auto h-[calc(100vh-4rem)];
+}
+
+.sidebar-link {
+  @apply flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors;
+}
+
+.sidebar-link-active {
+  @apply bg-primary/10 text-primary;
+}
+
+/* Animaciones para elementos de la página */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para la barra de progreso */
+.progress-ring {
+  @apply relative inline-flex;
+}
+
+.progress-ring-circle {
+  @apply transition-all duration-1000 ease-out;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* Estilos para el modo oscuro/claro */
+.theme-toggle {
+  @apply p-2 rounded-md hover:bg-muted transition-colors;
+}
+
