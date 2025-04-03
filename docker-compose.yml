@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: codemastery-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=codemastery
+    networks:
+      - codemastery-net
+
+  db:
+    image: mysql:8.0
+    container_name: codemastery-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: codemastery
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db/codemasteryfinal.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - codemastery-net
+
+networks:
+  codemastery-net:
