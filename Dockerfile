@@ -1,23 +1,23 @@
 # Usar una imagen base oficial de Node
 FROM node:18-alpine
 
-# Establecer el directorio de trabajo dentro del contenedor
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar package.json y lock
+# Copiar dependencias
 COPY package*.json ./
 
-# Instalar dependencias ignorando conflictos de peer deps
+# Instalar dependencias
 RUN npm install --legacy-peer-deps
 
-# Copiar el resto del proyecto
+# Copiar todo el proyecto
 COPY . .
 
-# Omitimos la build en esta etapa (ya que MySQL aún no está listo)
-# RUN npm run build
+# Compilar la app Next.js
+RUN npm run build
 
-# Exponer el puerto estándar de Next.js
+# Exponer el puerto estándar
 EXPOSE 3000
 
-# Arrancamos en modo desarrollo para evitar que se caiga el build por falta de DB
-CMD ["npm", "run", "dev"]
+# Iniciar en modo producción
+CMD ["npm", "start"]
