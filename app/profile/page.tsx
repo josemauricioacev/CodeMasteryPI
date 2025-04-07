@@ -9,30 +9,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
-import { useToast } from "@/components/ui/use-toast"
 import { useRouter } from "next/navigation"
 
 export default function ProfilePage() {
   const { data: session } = useSession()
-  const { toast } = useToast()
   const router = useRouter()
   const [name, setName] = useState(session?.user?.name || "")
   const [email, setEmail] = useState(session?.user?.email || "")
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-
-    // Simulamos una actualización exitosa
-    setTimeout(() => {
-      setIsLoading(false)
-      toast({
-        title: "Perfil actualizado",
-        description: "Tu información ha sido actualizada correctamente.",
-      })
-    }, 1000)
-  }
 
   if (!session) {
     return (
@@ -70,7 +53,7 @@ export default function ProfilePage() {
             </div>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre</Label>
                 <Input id="name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -90,10 +73,7 @@ export default function ProfilePage() {
                   </p>
                 )}
               </div>
-              <div className="flex justify-between">
-                <Button type="submit" disabled={isLoading}>
-                  {isLoading ? "Guardando..." : "Guardar Cambios"}
-                </Button>
+              <div className="flex justify-end">
                 <Button type="button" variant="outline" onClick={() => router.push("/dashboard")}>
                   Volver al Dashboard
                 </Button>
@@ -105,4 +85,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-
