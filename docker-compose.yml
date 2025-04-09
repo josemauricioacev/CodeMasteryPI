@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -6,30 +6,21 @@ services:
     container_name: codemastery-app
     ports:
       - "3000:3000"
-    depends_on:
-      - db
     environment:
-      - DB_HOST=db
+      - DB_HOST=switchback.proxy.rlwy.net
+      - DB_PORT=54448
       - DB_USER=root
-      - DB_PASSWORD=root
+      - DB_PASSWORD=bpHrLGxGcpPLThecGEYRNhnCraXBlwbd
       - DB_NAME=codemastery
-    networks:
-      - codemastery-net
-
-  db:
-    image: mysql:8.0
-    container_name: codemastery-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: codemastery
-    ports:
-      - "3307:3306"
-    volumes:
-      - ./db/codemasteryfinal.sql:/docker-entrypoint-initdb.d/init.sql
+      
+      # Incluye también tus variables de NextAuth y Google OAuth
+      - NEXTAUTH_URL=https://codemasterypi-production.up.railway.app
+      - NEXTAUTH_SECRET=6bf82c71e4bbb38face199d3262e76db
+      - GOOGLE_CLIENT_ID=1032118627953-7633895lbrnp3e9nfqs066qmces7j6m6.apps.googleusercontent.com
+      - GOOGLE_CLIENT_SECRET=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
+      
     networks:
       - codemastery-net
 
 networks:
   codemastery-net:
-#cambios al .env
